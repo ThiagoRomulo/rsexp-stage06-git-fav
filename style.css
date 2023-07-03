@@ -1,0 +1,299 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --text-color: #e1e1e6;
+  --bg-color: #000000;
+
+  --input-bg-color: #06181c;
+  --input-border-color: #4a808c;
+  --placeholder-color: #7c7c8a;
+
+  --border-radius: 0.5rem;
+  --time-transition: 0.3s;
+
+  --button-bg-color: #065e7c;
+  --button-color: #ffffff;
+  --button-bg-color-hover: #ffffff;
+  --button-color-hover: #065e7c;
+
+  --table-border-color: #4a808c;
+  --table-border-radius: 1.2rem;
+  --thead-bg-color: #092d38;
+  --tbody-bg-color: #06181c;
+  --tbody-bg-hover-color: #141414;
+  --table-button-text-color: #f75a68;
+  --tfoter-text-color: #4e5455;
+}
+
+.hide {
+  display: none;
+}
+
+.sr-only {
+  /* Utilizado para esconder um texto para o leitor de tela HTML veja, mas o usuario não vê. Usamos no Header no label do input */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px; /* A ideia aqui é o tamanho de 1px não mostrar na tela */
+  overflow: hidden; /* Transbordando da caixa. Aqui está dizendo, não permita transbordamento da caixa, então ele precisa ficar 1px de largura e altura. hidden é para não ter transbordamento*/
+  clip: rect(
+    0,
+    0,
+    0,
+    0
+  ); /* Criando um retângulo, forçando para a caixa ficar inexistente */
+  white-space: nowrap; /* Serve para não deixar quebrar a linha */
+  border-width: 0;
+}
+
+body * {
+  border: none;
+  text-decoration: none;
+
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+
+  background-color: var(--bg-color);
+}
+
+.page {
+  margin-top: 5rem;
+  width: 112rem;
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8.7rem;
+}
+
+.favorite {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.favorite input {
+  width: 46.2rem;
+  height: 4.8rem;
+  border-radius: var(--border-radius);
+  background-color: var(--input-bg-color);
+
+  padding: 1.6rem;
+  outline: none;
+  border: 1px solid var(--bg-color);
+  transition: all var(--time-transition);
+}
+
+.favorite input:hover {
+  border-color: var(--placeholder-color);
+}
+
+.favorite input:focus {
+  border-color: var(--input-border-color);
+}
+
+.favorite input::placeholder {
+  font-weight: 400;
+  color: var(--placeholder-color);
+}
+
+.favorite button {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  border-radius: var(--border-radius);
+  background-color: var(--button-bg-color);
+  font-weight: 700;
+  color: var(--button-color);
+  padding: 1.2rem 3.2rem;
+  cursor: pointer;
+}
+
+.favorite button span {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
+.favorite button:hover {
+  background-color: var(--button-bg-color-hover);
+}
+
+.favorite button:hover span {
+  color: var(--button-color-hover);
+}
+
+.favorite button:hover svg path {
+  fill: var(--button-color-hover);
+}
+
+.favorite button,
+.favorite button span,
+.favorite button svg path {
+  transition: all var(--time-transition);
+}
+
+/* TABLE */
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  outline: 1px solid var(--table-border-color);
+}
+
+thead tr {
+  height: 6.4rem;
+}
+
+thead th {
+  background-color: var(--thead-bg-color);
+  text-align: start;
+  padding-left: 4rem;
+  font-size: 2rem;
+}
+
+thead th:first-child,
+tbody td:first-child {
+  width: 50.4rem;
+}
+
+thead th:nth-child(2),
+tbody td:nth-child(2) {
+  width: 21.8rem;
+}
+
+thead th:nth-child(3),
+tbody td:nth-child(3) {
+  width: 22rem;
+}
+
+thead th:last-child,
+tbody td:last-child {
+  width: 17.8rem;
+}
+
+/* Foi adicionado display: block para termos o scroll no tbody
+Foi necessário adicionar todas as larguras das colunas por causa do display: block */
+thead {
+  display: block;
+}
+tbody {
+  display: block;
+  max-height: 52rem;
+  overflow-y: auto;
+}
+
+table tbody::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+/* Cor da scrollbar */
+table tbody::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: var(--table-border-color);
+}
+
+/* caminho para barra percorrer */
+table tbody::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+tbody tr:nth-child(even) td {
+  background-color: var(--tbody-bg-color);
+  border-top: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Fazer o hover quando selecionar cada linha da tabela, assim fica bom para quando chegar no remover, olhar para esquerda e ver qual name está selecionado
+  Precisou ser depois da seleção das linhas (even), para funcionar a especificidade */
+tbody tr:hover td {
+  background-color: var(--tbody-bg-hover-color);
+}
+
+tbody td {
+  padding: 2.4rem 4rem;
+}
+
+tbody .user {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+tbody .user img {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+tbody .user .name,
+tbody .repositories,
+tbody .followers {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+tbody .username {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+tbody td button {
+  width: 8.5rem;
+  height: 5.6rem;
+  background: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--table-button-text-color);
+  cursor: pointer;
+  text-align: start;
+}
+
+tfoot tr {
+  height: 62.4rem;
+}
+
+tfoot td .noFavorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+}
+
+tfoot td .noFavorite p {
+  font-family: "Roboto Mono", monospace;
+  font-size: 4rem;
+  color: var(--tfoter-text-color);
+}
+
+tfoot td .noFavorite svg path {
+  fill: var(--tfoter-text-color);
+}
