@@ -3,26 +3,8 @@ import { CommAPI } from "./apiGithub.js"
 
 class DataFavorites {
   constructor(root) {
-    // this.entries = [
-    //   {
-    //     name: "Thiago Romulo",
-    //     login: "ThiagoRomulo",
-    //     public_repos: 20,
-    //     followers: 5,
-    //   },
-    //   {
-    //     name: "Diego Fernandes",
-    //     login: "diego3g",
-    //     public_repos: 200,
-    //     followers: 45000,
-    //   },
-    //   {
-    //     name: "Thiago",
-    //     login: "thiago",
-    //     public_repos: 200,
-    //     followers: 45000,
-    //   },
-    // ]
+    this.root = document.querySelector(root)
+    this.load()
   }
 
   // Aqui usamos o conceito de imutabilidade
@@ -68,11 +50,9 @@ class DataFavorites {
 export class FavoritesView extends DataFavorites {
   constructor(root) {
     super(root)
-    this.root = document.querySelector(root)
+
     this.tbody = this.root.querySelector("table tbody")
     this.search = this.root.querySelector("#username")
-
-    this.load()
     this.update()
     this.onAdd()
   }
